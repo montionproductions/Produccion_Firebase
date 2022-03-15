@@ -1,6 +1,8 @@
 using Firebase;
 using Firebase.Analytics;
 using Firebase.Auth;
+using Firebase.Database;
+using Firebase.Extensions;
 
 using TMPro;
 using UnityEngine;
@@ -9,6 +11,7 @@ public class FirebaseInit : MonoBehaviour
 {
     FirebaseApp app;
     FirebaseAuth auth;
+    DatabaseReference mDatabaseRef;
     System.EventHandler AuthStateChanged;
     public Firebase.Auth.FirebaseUser currentUser;
 
@@ -43,6 +46,9 @@ public class FirebaseInit : MonoBehaviour
                 auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
                 auth.StateChanged += AuthStateChanged;
                 AuthStateChanged(this, null);
+
+                // Get the root reference location of the database.
+                mDatabaseRef = FirebaseDatabase.DefaultInstance.RootReference;
             }
             else
             {
@@ -93,6 +99,9 @@ public class FirebaseInit : MonoBehaviour
             currentUser = task.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 currentUser.DisplayName, currentUser.UserId);
+
+            AddUserInfo();
+            GetUserInfo();
         });
     }
 
@@ -100,5 +109,29 @@ public class FirebaseInit : MonoBehaviour
     {
         auth.StateChanged -= AuthStateChanged;
         auth = null;
+    }
+
+    void AddUserInfo()
+    {
+        mDatabaseRef.Child("users").Child(currentUser.UserId).Child("username").SetValueAsync("Monti");
+    }
+
+    void GetUserInfo()
+    {
+      FirebaseDatabase.DefaultInstance
+      .GetReference("Movie")
+      .GetValueAsync().ContinueWithOnMainThread(task => {
+          if (task.IsFaulted)
+          {
+              // Handle the error...
+              Debug.Log("Datos no encontrados");
+          }
+          else if (task.IsCompleted)
+          {
+              DataSnapshot snapshot = task.Result;
+              // Do something with snapshot...
+              Debug.Log(snapshot.ToString());
+          }
+      });
     }
 }
