@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "236039472108",
+    "project_id": "produccion01-b056f",
+    "storage_bucket": "produccion01-b056f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236039472108:android:b7fae25d83bcb7e0d436c9",
+        "android_client_info": {
+          "package_name": "com.MontiCompany.Produccion_Firebase1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236039472108-fm9fcl8ntp24uq25u19aec603t2fo4kv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCINXva0rSDypTH6UTUrDqgKKLOLsBkjPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236039472108-fm9fcl8ntp24uq25u19aec603t2fo4kv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
